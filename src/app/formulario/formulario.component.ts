@@ -1,5 +1,6 @@
 import { Component, OnInit, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
 import { Persona } from '../persona.model';
+import { LogginService } from '../LogginService.service';
 
 @Component({
   selector: 'app-formulario',
@@ -15,13 +16,14 @@ export class FormularioComponent implements OnInit {
   @ViewChild('nombreInput', { static: false }) nombreInput: ElementRef;
   @ViewChild('apellidoInput', { static: false }) apellidoInput: ElementRef;
 
-  constructor() { }
+  constructor(private logginService: LogginService) { }
 
   ngOnInit() {
   }
-  
+
   onAgregarPersona() {
     let persona1 = new Persona(this.nombreInput.nativeElement.value, this.apellidoInput.nativeElement.value);
+    this.logginService.enviaMensajeAConsola("Enviamos persona " + JSON.stringify(persona1));
     this.personaCreada.emit(persona1);
   }
 
