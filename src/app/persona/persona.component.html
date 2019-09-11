@@ -1,8 +1,7 @@
-<div class="row">
-  <div class="col">
-    <div class="my-2">
-      {{indice + 1}}: {{ persona.nombre }} {{persona.apellido}}
-      <button class="btn btn-info mx-4 p-0 px-3" id="editar" (click)="emitirSaludo()">Editar</button>
-    </div>
-  </div>
+
+<div class="item">
+  <input type="checkbox" (click)="emitirSaludo()" />
+  <p>
+    {{indice + 1}}: {{ persona.nombre }} {{persona.apellido}}
+  </p>
 </div>

@@ -14,11 +14,9 @@ export class FormularioComponent implements OnInit {
   Se borra ya que se usan los servicios y se sustituye con eso
   */
   //@Output() personaCreada = new EventEmitter<Persona>();
-  /*nombreInput: string;
-  apellidoInput: string;*/
 
-  @ViewChild('nombreInput', { static: false }) nombreInput: ElementRef;
-  @ViewChild('apellidoInput', { static: false }) apellidoInput: ElementRef;
+  nombreInput: string;
+  apellidoInput: string;
 
   constructor(private logginService: LogginService,
     private personasService: PersonasService) {
@@ -31,7 +29,7 @@ export class FormularioComponent implements OnInit {
   }
 
   onAgregarPersona() {
-    let persona1 = new Persona(this.nombreInput.nativeElement.value, this.apellidoInput.nativeElement.value);
+    let persona1 = new Persona(this.nombreInput, this.apellidoInput);
     this.personasService.agregarPersona(persona1);
   }
 
