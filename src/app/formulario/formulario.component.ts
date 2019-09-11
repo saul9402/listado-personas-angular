@@ -20,7 +20,12 @@ export class FormularioComponent implements OnInit {
   @ViewChild('nombreInput', { static: false }) nombreInput: ElementRef;
   @ViewChild('apellidoInput', { static: false }) apellidoInput: ElementRef;
 
-  constructor(private logginService: LogginService, private personasService: PersonasService) { }
+  constructor(private logginService: LogginService,
+    private personasService: PersonasService) {
+    this.personasService.saludar.subscribe((indice: number) => {
+      alert("EL indice es: " + indice);
+    });
+  }
 
   ngOnInit() {
   }

@@ -1,12 +1,14 @@
 import { Persona } from './persona.model';
 import { LogginService } from './LogginService.service';
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 
 /*
 Se agrega este decorador cuando se necesita inyectar un servicio dentro de otro servicio
 */
 @Injectable()
 export class PersonasService {
+
+    saludar = new EventEmitter<number>();
 
     constructor(private logginService: LogginService) { }
 
