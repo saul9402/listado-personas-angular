@@ -1,0 +1,13 @@
+<div class="box">
+    <app-persona
+        *ngFor="let personaElemento of personas; let i= index"
+        [persona]="personaElemento"
+        [indice]="i">
+        <!-- Con esto se hace propertyBinding pero entre componentes para 
+          pasar los datos que está manejando hacia un componente hijo que
+          realizara alguna tareea con esos datos. En este caso iterar y mostrar -->
+    </app-persona>
+</div>
+<div class="box">
+    <app-formulario></app-formulario>
+</div>
