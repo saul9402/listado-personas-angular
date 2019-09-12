@@ -19,6 +19,7 @@ export class FormularioComponent implements OnInit {
   nombreInput: string;
   apellidoInput: string;
   index: number;
+  modoEdicon: number;
 
   constructor(private logginService: LogginService,
     private personasService: PersonasService,
@@ -31,7 +32,8 @@ export class FormularioComponent implements OnInit {
 
   ngOnInit() {
     this.index = this.route.snapshot.params['id'];
-    if(this.index){
+    this.modoEdicon = +this.route.snapshot.queryParams['modoEdicion'];
+    if (this.modoEdicon != null && this.modoEdicon === 1) {
       const persona = this.personasService.encontrarPersona(this.index);
       this.nombreInput = persona.nombre;
       this.apellidoInput = persona.apellido;
@@ -40,12 +42,19 @@ export class FormularioComponent implements OnInit {
 
   onGuardarPersona() {
     let persona1 = new Persona(this.nombreInput, this.apellidoInput);
-    if(this.index){
+    if (this.modoEdicon != null && this.modoEdicon === 1) {
       this.personasService.modificarPersona(this.index, persona1);
-    }else{
+    } else {
       this.personasService.agregarPersona(persona1);
     }
     this.router.navigate(["personas"]);
+  }
+
+  eliminarPersona() {
+    if (this.index != null) {
+      this.personasService.eliminarPersona(this.index);
+    }
+    this.router.navigate(['personas']);
   }
 
 }

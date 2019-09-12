@@ -3,8 +3,9 @@
   <ul>
     <li>
       <a [routerLink]="['/personas', indice]"
-        routerLinkActive="router-link-active">{{ persona.nombre
-        }} {{persona.apellido}}</a>
+        [queryParams] = "{modoEdicion: '1'}"
+      >
+        {{ persona.nombre }} {{persona.apellido}}</a>
     </li>
   </ul>
 </div>
