@@ -1,6 +1,7 @@
 import { Persona } from './persona.model';
 import { LogginService } from './LogginService.service';
 import { Injectable, EventEmitter } from '@angular/core';
+import { DataService } from './data.service';
 
 /*
 Se agrega este decorador cuando se necesita inyectar un servicio dentro de otro servicio
@@ -10,16 +11,25 @@ export class PersonasService {
 
     saludar = new EventEmitter<number>();
 
-    constructor(private logginService: LogginService) { }
+    constructor(private logginService: LogginService, private dataService: DataService) { }
 
-    personas: Persona[] = [
-        new Persona("Juan", "Perez"),
-        new Persona("Laura", "Juarez")];
+    personas: Persona[] = [];
 
+    setPersonas(personas: Persona[]) {
+        this.personas = personas;
+    }
+
+    obtenerPersonas() {
+        return this.dataService.cargarPersonas();
+    }
 
     agregarPersona(persona: Persona) {
         this.logginService.enviaMensajeAConsola("Se agregó la siguiente persona: " + JSON.stringify(persona));
+        if (this.personas == null) {
+            this.personas = [];
+        }
         this.personas.push(persona);
+        this.dataService.guardarPersonas(this.personas);
     }
 
     encontrarPersona(index: number) {
